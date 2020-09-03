@@ -1,0 +1,7 @@
+<!--logs.wxml-->
+<cBar id="c-bar" title="风险测评" showSearch="{{true}}" showBack="{{true}}" searchEvent="{{searchEvent}}" background="#3356D9"></cBar>
+<view class="container log-list">
+  <block wx:for="{{logs}}" wx:key="indx" wx:for-item="log">
+    <text class="log-item">{{index + 1}}. {{log}}</text>
+  </block>
+</view>

@@ -1,0 +1,54 @@
+<view class="cst-nav-bar {{extClass}}" style="background: {{background}};height: {{navBarHeight+ navBarExtendHeight}}px;">
+    <view class="cst-nav-bar__placeholder {{ios ? 'ios' : 'android'}} bg-gradual-blue" style="padding-top: {{navBarHeight+ navBarExtendHeight}}px;visibility: hidden;"></view>
+    <view class="cst-nav-bar__inner {{ios ? 'ios' : 'android'}}" style="{{navigationbarinnerStyle}}{{displayStyle}}">
+        <view class="cst-nav-bar__left" style="{{navBarLeft}}">
+          <view wx:if="{{home || back}}" style="{{navBarSubLeft}}">
+            <block wx:if="{{(back&&!home) || (!back&&home)}}">
+                <view class="cst-nav-bar__button-one {{theme}}">
+                  <block wx:if="{{back&&!home}}">
+                      <view bindtap="back" class="cst-nav-bar__button {{theme}}" style="width:{{iconSize}}px">
+                        <iconfont name="back" size="18" class="cst-text" />
+                      </view>
+                  </block>
+                  <block wx:if="{{!back&&home}}">
+                      <view bindtap="home" class="cst-nav-bar__button {{theme}}" style="width:{{iconSize}}px">
+                        <iconfont name="home" size="18" class="cst-text" />
+                      </view>
+                  </block>
+                </view>
+            </block>
+            <block wx:elif="{{back&&home}}">
+                <view class="cst-nav-bar__buttons {{ios ? 'ios' : 'android'}} {{theme}}" wx:if="{{home}}">
+                    <view bindtap="back" class="cst-nav-bar__button">
+                        <iconfont name="back" size="18" class="cst-text" />
+                    </view>
+                    <view bindtap="home" class="cst-nav-bar__button">
+                        <iconfont name="home" size="18" class="cst-text" />
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <slot name="left"></slot>
+            </block>
+          </view>
+        </view>
+        <view class="cst-nav-bar__center {{searchBar?'search':''}}" style="{{searchBar?'':navTitleWidth}}">
+            <view wx:if="{{searchBar}}" class='cst-nav-bar-search' style="height:{{capsulePosition.height}}px;"  bindtap="search">
+                <iconfont name="search" size="{{searchIconSize}}" color="{{searchTextColor}}" />
+                <input class="cst-nav-bar-search__input" style="color:{{searchTextColor}}" maxlength="10" placeholder="{{searchPlaceholder}}" value="{{searchText}}" bindblur="searchEvent" />
+                <!-- <input class='' style="color:{{searchTextColor}}">{{searchText}}</view> -->
+            </view>
+            <block wx:elif="{{title || loading}}">
+              <view wx:if="{{loading}}" class="cst-nav-bar__loading">
+                <iconfont name="loading" size="{{iconSize}}" font-class="icon-loading" color="{{['#fff']}}" class="cst-text cst-loading" />
+              </view>
+              <view wx:if="{{title}}" class="cst-nav-bar__title-item">
+                <text class='cst-nav-bar__center-title {{theme}}'>{{title}}</text>
+              </view>
+            </block>
+        </view>
+        <view class='cst-nav-bar__right'>
+            <slot name="right"></slot>
+        </view>
+    </view>
+</view>

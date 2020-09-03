@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "cBar": "/components/cBar/index"
+  }
+}
